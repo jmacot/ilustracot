@@ -1,19 +1,67 @@
-# 🎨 IlustraCOT
+# 🎨 IlustraCOT — OperativeINK
 
-Generador de prompts para ilustraciones médicas de Cirugía Ortopédica y Traumatología
+Generador de prompts para ilustraciones medicas de Cirugia Ortopedica y Traumatologia. Crea prompts optimizados para IA generativa con estilos visuales profesionales.
 
-## Acceso directo
-[Abrir la aplicación](https://jmacot.github.io/ilustracot/)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
+![Estilos](https://img.shields.io/badge/estilos-5-1a3a5c)
+![Sin dependencias](https://img.shields.io/badge/dependencias-ninguna-grey)
+
+---
+
+## Acceso
+
+> Acceso directo — no requiere autenticacion.
+
+[Abrir la aplicacion](https://jmacot.github.io/ilustracot/)
+
+---
 
 ## Funcionalidades
-- Generador de prompts optimizados para ilustraciones médicas
-- Paleta de estilos visuales (fotorrealista, esquemático, acuarela, Netter, 3D)
-- Categorías: cirugía abierta y radiología
 
-## Tecnología
-- HTML5, CSS3 y JavaScript puro
-- Tipografías: Inter, Lora (Google Fonts)
-- Sin frameworks, sin dependencias
+- **Generador de prompts OperativeINK** optimizados para ilustraciones medicas con IA
+- **5 estilos visuales**: fotorrealista, esquematico, acuarela, Netter clasico y 3D
+- **Categorias quirurgicas**: cirugia abierta, artroscopia, radiologia y mas
+- **Paleta de colores** profesional para cada estilo
+- **Prompts completos** listos para copiar y usar en Gemini, DALL-E o Midjourney
+- **Modo oscuro** con deteccion automatica
+- **Responsive** para uso en escritorio y movil
+
+---
+
+## Como usar
+
+1. Abre la aplicacion en el navegador
+2. Selecciona la **categoria** quirurgica
+3. Elige el **estilo visual** deseado
+4. Personaliza los **parametros** del prompt
+5. **Copia** el prompt generado y usalo en tu herramienta de IA favorita
+
+---
+
+## Estructura del proyecto
+
+```
+Ilustracot/
+├── operativeink-prompt-generator.html  ← aplicacion principal
+├── icon.svg                            ← icono de la app
+├── operativeink-prompts-completos.md   ← catalogo de prompts
+├── Analisis-OperativeINK.md            ← documento de analisis
+├── Paleta/                             ← paletas de colores por estilo
+├── .gitignore
+├── LICENSE                             ← MIT
+└── README.md                           ← este archivo
+```
+
+---
+
+## Tecnologia
+
+- **HTML5 + CSS3 + JavaScript vanilla**
+- Tipografias: [Inter](https://fonts.google.com/specimen/Inter) y [Lora](https://fonts.google.com/specimen/Lora) (Google Fonts)
+- Sin frameworks, sin build tools, sin backend
+
+---
 
 ## Licencia
+
 MIT
