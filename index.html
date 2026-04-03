@@ -76,7 +76,7 @@
     .hero-dot-grid {
       position: absolute; inset: 0;
       background-image: radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
-      background-size: 24px 24px; z-index: 0;
+      background-size: 28px 28px; z-index: 0;
     }
     [data-theme="dark"] .hero-dot-grid {
       background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
@@ -593,7 +593,7 @@
       <span class="style-palette-title" id="palette-cat-label">General</span>
       <span class="style-palette-line"></span>
     </div>
-    <div class="styles-carousel" id="styles-grid"></div>
+    <div class="styles-carousel" id="styles-grid" role="listbox"></div>
   </div>
 
   <!-- PASO 3: Resultado -->
@@ -719,6 +719,8 @@ function renderStyles(cat){
   grid.innerHTML='';
   PROMPTS[cat].styles.forEach(function(s,i){
     var card=document.createElement('div');
+    card.setAttribute('role','option');
+    card.setAttribute('tabindex','0');
     card.className='style-card';
     card.setAttribute('data-style-id', s.id);
     card.style.animation='popIn 0.35s ease-out '+i*0.07+'s both';
@@ -743,6 +745,7 @@ function renderStyles(cat){
     body.appendChild(descDiv);
     card.appendChild(body);
     card.onclick=function(){pickStyle(s,card);};
+    card.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();pickStyle(s,card);}});
     grid.appendChild(card);
   });
 }
@@ -757,7 +760,7 @@ function pickStyle(style,card){
   document.getElementById('prompt-output').textContent=style.prompt;
 
   show('sec-result');show('sec-refine');show('sec-tips');
-  updateStepper(3);
+  updateStepper(4);
 
   // slideReveal
   const el=document.getElementById('sec-result');
