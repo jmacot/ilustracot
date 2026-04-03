@@ -226,162 +226,87 @@
     }
     .cat-pill svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
 
-    /* ── STYLE PALETTE ── */
+    /* ── STYLE CAROUSEL ── */
     .style-palette-header {
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 4px; margin-bottom: 10px;
     }
     .style-palette-title {
-      font-size: 11px; font-weight: 700; color: var(--text-light);
+      font-size: 10px; font-weight: 700; color: var(--accent);
       text-transform: uppercase; letter-spacing: 1.5px;
     }
     .style-palette-line {
       flex: 1; height: 1px; background: var(--border); margin: 0 12px;
     }
-    .styles-grid {
-      display: flex; flex-direction: column; gap: 10px;
+    .styles-carousel {
+      display: flex; gap: 12px; overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding: 4px 0 8px;
     }
+    .styles-carousel::-webkit-scrollbar { display: none; }
+
     .style-card {
-      position: relative; border-radius: var(--radius); overflow: hidden;
-      cursor: pointer; transition: transform 0.3s, box-shadow 0.3s;
-      min-height: 90px; display: flex; align-items: flex-end;
-      border: 2px solid transparent;
+      flex-shrink: 0; width: 155px;
+      border-radius: 16px; overflow: hidden;
+      border: 1.5px solid var(--border-light);
+      background: var(--surface);
+      cursor: pointer; transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+      scroll-snap-align: start;
     }
-    .style-card::before {
-      content: ''; position: absolute; inset: 0; z-index: 0;
-      opacity: 0.92; transition: opacity 0.3s;
-    }
-    /* When a real thumbnail is set, hide the CSS gradient fallback */
-    .style-card.has-thumb::before { opacity: 0 !important; }
-    .style-card.has-thumb { min-height: 110px; }
-    .style-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
-    .style-card:hover::before { opacity: 1; }
+    .style-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
     .style-card.active {
       border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(26,58,92,0.15), var(--shadow-hover);
+      box-shadow: 0 0 0 3px rgba(14,165,233,0.15), 0 8px 24px rgba(0,0,0,0.08);
     }
     [data-theme="dark"] .style-card.active {
       border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(147,197,253,0.2), var(--shadow-hover);
+      box-shadow: 0 0 0 3px rgba(96,165,250,0.2), 0 8px 24px rgba(0,0,0,0.3);
     }
-
-    /* Watermark text */
-    .style-card .watermark {
-      position: absolute; top: 12px; right: 14px;
-      font-size: 10px; font-weight: 700; letter-spacing: 2px;
-      text-transform: uppercase; opacity: 0.15; color: white;
-      z-index: 1; pointer-events: none;
+    .style-card-thumb {
+      height: 90px; position: relative;
+      background-size: cover; background-position: center;
     }
-
-    /* Check badge */
-    .style-card .check-badge {
-      position: absolute; top: 50%; right: 16px; transform: translateY(-50%);
-      width: 28px; height: 28px; border-radius: 50%;
-      background: rgba(255,255,255,0.25); backdrop-filter: blur(4px);
+    .style-card-thumb .check-badge {
+      position: absolute; top: 8px; right: 8px;
+      width: 22px; height: 22px; border-radius: 50%;
+      background: var(--accent-gradient);
       display: none; align-items: center; justify-content: center;
-      z-index: 3;
     }
-    .style-card .check-badge svg {
-      width: 16px; height: 16px; stroke: white; fill: none; stroke-width: 2.5;
-    }
+    .style-card-thumb .check-badge svg { width: 12px; height: 12px; stroke: white; fill: none; stroke-width: 2.5; }
     .style-card.active .check-badge { display: flex; }
+    .style-card-body { padding: 12px; }
+    .style-card-body .style-name { font-size: 14px; font-weight: 700; color: var(--text); }
+    .style-card-body .style-desc { font-size: 10px; color: var(--text-light); margin-top: 2px; }
 
-    /* Text overlay */
-    .style-card .style-text {
-      position: relative; z-index: 2; padding: 16px 20px; width: 100%;
-      background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 70%, transparent 100%);
-    }
-    .style-card .style-name {
-      font-family: 'Lora', serif; font-size: 17px; font-weight: 700;
-      color: #ffffff; margin-bottom: 2px; text-shadow: 0 1px 4px rgba(0,0,0,0.3);
-    }
-    .style-card .style-desc {
-      font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.75);
-      text-transform: uppercase; letter-spacing: 0.5px;
-    }
-
-    /* ── Per-style visual backgrounds ── */
-    /* Photorealism */
-    .style-card[data-style-id="photorealism"]::before,
-    .style-card[data-style-id="photorealism_endo"]::before {
+    /* Per-style thumb backgrounds */
+    .style-card[data-style-id="photorealism"] .style-card-thumb,
+    .style-card[data-style-id="photorealism_endo"] .style-card-thumb {
       background: linear-gradient(135deg, #2c3e50 0%, #3498db 40%, #1a5276 70%, #154360 100%);
     }
-    /* Digital / Tinta + Acuarela */
-    .style-card[data-style-id="digital"]::before,
-    .style-card[data-style-id="digital_endo"]::before {
+    .style-card[data-style-id="digital"] .style-card-thumb,
+    .style-card[data-style-id="digital_endo"] .style-card-thumb {
       background: linear-gradient(135deg, #1a3a4a 0%, #2e7d6e 35%, #1a6b5a 60%, #134e4a 100%);
     }
-    /* Netter / Textbook */
-    .style-card[data-style-id="textbook"]::before,
-    .style-card[data-style-id="textbook_endo"]::before {
+    .style-card[data-style-id="textbook"] .style-card-thumb,
+    .style-card[data-style-id="textbook_endo"] .style-card-thumb {
       background: linear-gradient(135deg, #5b7a6a 0%, #8fae91 30%, #c4b896 60%, #a09070 100%);
     }
-    /* Schematic B&W */
-    .style-card[data-style-id="schematic"]::before,
-    .style-card[data-style-id="schematic_endo"]::before {
+    .style-card[data-style-id="schematic"] .style-card-thumb,
+    .style-card[data-style-id="schematic_endo"] .style-card-thumb {
       background: linear-gradient(135deg, #f5f5f0 0%, #e0ddd5 40%, #c8c4bc 70%, #b0aca4 100%);
     }
-    .style-card[data-style-id="schematic"] .style-name,
-    .style-card[data-style-id="schematic_endo"] .style-name {
-      color: #2c2c2c;
-    }
-    .style-card[data-style-id="schematic"] .style-desc,
-    .style-card[data-style-id="schematic_endo"] .style-desc {
-      color: rgba(44,44,44,0.7);
-    }
-    .style-card[data-style-id="schematic"] .style-text,
-    .style-card[data-style-id="schematic_endo"] .style-text {
-      background: linear-gradient(to top, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.1) 70%, transparent 100%);
-    }
-    .style-card[data-style-id="schematic"] .watermark,
-    .style-card[data-style-id="schematic_endo"] .watermark {
-      color: #333;
-    }
-    .style-card[data-style-id="schematic"] .check-badge,
-    .style-card[data-style-id="schematic_endo"] .check-badge {
-      background: rgba(0,0,0,0.15);
-    }
-    .style-card[data-style-id="schematic"] .check-badge svg,
-    .style-card[data-style-id="schematic_endo"] .check-badge svg {
-      stroke: #333;
-    }
-    /* When schematic has real thumbnail, revert to standard dark text overlay */
-    .style-card[data-style-id="schematic"].has-thumb .style-text,
-    .style-card[data-style-id="schematic_endo"].has-thumb .style-text {
-      background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.15) 70%, transparent 100%);
-    }
-    .style-card[data-style-id="schematic"].has-thumb .style-name,
-    .style-card[data-style-id="schematic_endo"].has-thumb .style-name {
-      color: #ffffff;
-    }
-    .style-card[data-style-id="schematic"].has-thumb .style-desc,
-    .style-card[data-style-id="schematic_endo"].has-thumb .style-desc {
-      color: rgba(255,255,255,0.75);
-    }
-    .style-card[data-style-id="schematic"].has-thumb .watermark,
-    .style-card[data-style-id="schematic_endo"].has-thumb .watermark {
-      color: white;
-    }
-    .style-card[data-style-id="schematic"].has-thumb .check-badge,
-    .style-card[data-style-id="schematic_endo"].has-thumb .check-badge {
-      background: rgba(255,255,255,0.25);
-    }
-    .style-card[data-style-id="schematic"].has-thumb .check-badge svg,
-    .style-card[data-style-id="schematic_endo"].has-thumb .check-badge svg {
-      stroke: white;
-    }
-
-    /* Radiology styles */
-    .style-card[data-style-id="radiology_plain"]::before {
+    .style-card[data-style-id="radiology_plain"] .style-card-thumb {
       background: linear-gradient(135deg, #0a0a1a 0%, #1a2744 40%, #0d1b2a 70%, #162032 100%);
     }
-    .style-card[data-style-id="radiology_ct"]::before {
+    .style-card[data-style-id="radiology_ct"] .style-card-thumb {
       background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 70%, #1a1a3e 100%);
     }
-    .style-card[data-style-id="angiography"]::before {
+    .style-card[data-style-id="angiography"] .style-card-thumb {
       background: linear-gradient(135deg, #1a0a0a 0%, #4a1525 35%, #2d1530 60%, #1a0f20 100%);
     }
-    .style-card[data-style-id="screenshot_fixer"]::before {
+    .style-card[data-style-id="screenshot_fixer"] .style-card-thumb {
       background: linear-gradient(135deg, #2a2a2a 0%, #404040 40%, #333 70%, #1a1a1a 100%);
     }
 
@@ -547,8 +472,7 @@
       .app-header { padding: 32px 20px 24px; border-radius: var(--radius); }
       .hero-glow { display: none; }
       .sky-toggle { --toggle-size: 16px; top: 8px; right: 8px; }
-      .styles-grid { flex-direction: column; }
-      .style-card { min-height: 80px; }
+      .style-card { width: 135px; }
       .refine-grid { grid-template-columns: 1fr; }
       .config-strip { flex-wrap: wrap; }
       .config-item { min-width: 25%; }
@@ -651,7 +575,7 @@
       <span class="style-palette-title" id="palette-cat-label">General</span>
       <span class="style-palette-line"></span>
     </div>
-    <div class="styles-grid" id="styles-grid"></div>
+    <div class="styles-carousel" id="styles-grid"></div>
   </div>
 
   <!-- PASO 3: Resultado -->
@@ -773,28 +697,34 @@ function selectCat(cat,el){
 }
 
 function renderStyles(cat){
-  const grid=document.getElementById('styles-grid');
+  var grid=document.getElementById('styles-grid');
   grid.innerHTML='';
-  PROMPTS[cat].styles.forEach((s,i)=>{
-    const card=document.createElement('div');
+  PROMPTS[cat].styles.forEach(function(s,i){
+    var card=document.createElement('div');
     card.className='style-card';
     card.setAttribute('data-style-id', s.id);
-    card.style.animation=`popIn 0.35s ease-out ${i*0.07}s both`;
-    const thumb=STYLE_THUMBS[s.id];
-    if(thumb){
-      card.style.backgroundImage=`url(${thumb})`;
-      card.style.backgroundSize='cover';
-      card.style.backgroundPosition='center';
-      card.classList.add('has-thumb');
-    }
-    card.innerHTML=`
-      <span class="watermark">AESCULAP</span>
-      <div class="check-badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-      <div class="style-text">
-        <div class="style-name">${s.name}</div>
-        <div class="style-desc">${s.desc}</div>
-      </div>`;
-    card.onclick=()=>pickStyle(s,card);
+    card.style.animation='popIn 0.35s ease-out '+i*0.07+'s both';
+    var thumb=STYLE_THUMBS[s.id];
+    var thumbDiv=document.createElement('div');
+    thumbDiv.className='style-card-thumb';
+    if(thumb) thumbDiv.setAttribute('style','background-image:url('+thumb+');background-size:cover;background-position:center;');
+    var badge=document.createElement('div');
+    badge.className='check-badge';
+    badge.innerHTML='<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
+    thumbDiv.appendChild(badge);
+    card.appendChild(thumbDiv);
+    var body=document.createElement('div');
+    body.className='style-card-body';
+    var nameDiv=document.createElement('div');
+    nameDiv.className='style-name';
+    nameDiv.textContent=s.name;
+    body.appendChild(nameDiv);
+    var descDiv=document.createElement('div');
+    descDiv.className='style-desc';
+    descDiv.textContent=s.desc;
+    body.appendChild(descDiv);
+    card.appendChild(body);
+    card.onclick=function(){pickStyle(s,card);};
     grid.appendChild(card);
   });
 }
