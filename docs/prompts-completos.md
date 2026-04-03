@@ -1,14 +1,12 @@
-# OperativeINK — Prompts Reales Extraídos del Código Fuente
+# IlustraCOT — Prompts para Ilustraciones Medicas
 
-> Estos son los prompts exactos que utiliza [OperativeINK.com](https://operativeink.com) internamente con **Google Gemini 3 Pro Image** (modelo: `gemini-3-pro-image-preview`).
+> Prompts optimizados para **Google Gemini 3 Pro Image** (modelo: `gemini-3-pro-image-preview`).
 >
-> **Configuración del modelo:**
+> **Configuracion del modelo:**
 > - **Temperature:** 0.2
-> - **Top P:** 0.2 (generación) / 0.1 (refinamiento)
-> - **Top K:** 2 (generación) / 1 (refinamiento)
+> - **Top P:** 0.2 (generacion) / 0.1 (refinamiento)
+> - **Top K:** 2 (generacion) / 1 (refinamiento)
 > - **Output:** 2K High Definition PNG
->
-> Extraído del análisis del perfil de [@traumaticum](https://x.com/traumaticum) y el código fuente de OperativeINK — Marzo 2026
 
 ---
 
@@ -496,7 +494,7 @@ Después de generar la primera versión, puedes iterar con instrucciones cortas:
 
 ---
 
-# CONSEJOS (de la documentación oficial de OperativeINK)
+# CONSEJOS
 
 - **Un cambio a la vez:** Las instrucciones compuestas aumentan la tasa de error. Aísla ajustes y apílalos en serie.
 - **No arregles bases malas:** Si la ilustración es fundamentalmente incorrecta, regenera desde cero. El refinamiento no corrige una base rota.
@@ -506,4 +504,4 @@ Después de generar la primera versión, puedes iterar con instrucciones cortas:
 
 ---
 
-*Extraído del código fuente de OperativeINK.com (assets/index-DyqAnlcT.js) — Marzo 2026*
+*Catalogo de prompts — IlustraCOT*

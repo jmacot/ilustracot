@@ -1,4 +1,4 @@
-# 🎨 IlustraCOT — OperativeINK
+# 🎨 IlustraCOT
 
 Generador de prompts para ilustraciones medicas de Cirugia Ortopedica y Traumatologia. Crea prompts optimizados para IA generativa con estilos visuales profesionales.
 
@@ -18,7 +18,7 @@ Generador de prompts para ilustraciones medicas de Cirugia Ortopedica y Traumato
 
 ## Funcionalidades
 
-- **Generador de prompts OperativeINK** optimizados para ilustraciones medicas con IA
+- **Generador de prompts** optimizados para ilustraciones medicas con IA
 - **5 estilos visuales**: fotorrealista, esquematico, acuarela, Netter clasico y 3D
 - **Categorias quirurgicas**: cirugia abierta, artroscopia, radiologia y mas
 - **Paleta de colores** profesional para cada estilo
@@ -42,14 +42,17 @@ Generador de prompts para ilustraciones medicas de Cirugia Ortopedica y Traumato
 
 ```
 Ilustracot/
-├── operativeink-prompt-generator.html  ← aplicacion principal
-├── icon.svg                            ← icono de la app
-├── operativeink-prompts-completos.md   ← catalogo de prompts
-├── Analisis-OperativeINK.md            ← documento de analisis
-├── Paleta/                             ← paletas de colores por estilo
+├── index.html                ← aplicacion principal
+├── README.md                 ← este archivo
+├── docs/                     ← documentacion
+│   ├── analisis.md           ← documento de analisis
+│   ├── prompts-completos.md  ← catalogo de prompts
+│   └── superpowers/          ← specs y planes de diseno
+├── assets/                   ← paletas de colores por estilo
+│   ├── cirugia-abierta/
+│   └── radiologia/
 ├── .gitignore
-├── LICENSE                             ← MIT
-└── README.md                           ← este archivo
+└── LICENSE                   ← MIT
 ```
 
 ---

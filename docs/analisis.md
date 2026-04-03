@@ -1,8 +1,8 @@
-# Análisis del Proyecto OperativeINK — Recomendaciones para Javi
+# Análisis del Proyecto IlustraCOT — Recomendaciones para Javi
 
-## ¿Qué es OperativeINK?
+## ¿Qué es IlustraCOT?
 
-OperativeINK es una herramienta web que convierte fotografías quirúrgicas reales en ilustraciones médicas de alta calidad usando inteligencia artificial (concretamente Google Gemini 3 Pro Image). El documento que tienes contiene los 12 prompts exactos que usa internamente, organizados en 3 categorías (cirugía abierta, endoscopia y radiología), cada una con varios estilos visuales.
+IlustraCOT es una herramienta web que convierte fotografías quirúrgicas reales en ilustraciones médicas de alta calidad usando inteligencia artificial (concretamente Google Gemini 3 Pro Image). El documento que tienes contiene los 12 prompts exactos que usa internamente, organizados en 3 categorías (cirugía abierta, endoscopia y radiología), cada una con varios estilos visuales.
 
 ---
 
@@ -69,7 +69,7 @@ Con alguien que sepa programar (o usando herramientas como Claude/Cursor), podr�
 - Subes tu foto
 - Le das a un botón y se genera la ilustración
 
-Esto es esencialmente lo que hace OperativeINK, pero podrías personalizarlo para tu práctica (añadir estilos específicos de rodilla, ajustar colores, etc.).
+Esto es esencialmente lo que hace IlustraCOT, pero podrías personalizarlo para tu práctica (añadir estilos específicos de rodilla, ajustar colores, etc.).
 
 ### Opción C: Integración con tu flujo de trabajo real
 
