@@ -367,16 +367,15 @@
     .btn-primary {
       display: flex; align-items: center; justify-content: center; gap: 8px;
       width: 100%; padding: 12px;
-      background: var(--accent); color: white; border: none;
+      background: var(--accent-gradient); color: white; border: none;
       border-radius: var(--radius-sm); font-size: 13px; font-weight: 700;
       font-family: 'Inter', Arial, sans-serif;
       cursor: pointer; transition: all 0.2s;
     }
-    .btn-primary:hover { background: var(--accent-hover); box-shadow: var(--shadow-hover); transform: translateY(-1px); }
+    .btn-primary:hover { filter: brightness(1.1); box-shadow: var(--shadow-hover); transform: translateY(-1px); }
     .btn-primary:active { transform: translateY(0); }
     .btn-primary.copied { background: var(--green); }
-    [data-theme="dark"] .btn-primary { color: #0f1724; }
-    [data-theme="dark"] .btn-primary.copied { color: #0f1724; }
+
     .btn-primary svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; }
 
     /* ── REFINE GRID ── */
