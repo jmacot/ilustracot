@@ -144,24 +144,59 @@
     .sky-toggle__spot:nth-child(2) { top: 55%; left: 40%; width: 15%; height: 15%; }
     .sky-toggle__spot:nth-child(3) { top: 30%; left: 60%; width: 20%; height: 20%; }
 
+    /* ── STEPPER ── */
+    .stepper {
+      display: flex; align-items: center; padding: 20px 4px 6px;
+      animation: fadeInUp 0.6s ease-out 0.05s both;
+    }
+    .stepper-step {
+      display: flex; align-items: center; gap: 8px;
+    }
+    .stepper-num {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: #e0e0e0; color: #999;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; flex-shrink: 0;
+      transition: background 0.4s, color 0.4s, box-shadow 0.4s;
+    }
+    .stepper-num svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2.5; }
+    .stepper-text {
+      font-size: 12px; font-weight: 600; color: #999;
+      transition: color 0.4s;
+    }
+    .stepper-line {
+      flex: 1; height: 2px; background: #e0e0e0; margin: 0 12px;
+      border-radius: 1px; position: relative; overflow: hidden;
+    }
+    .stepper-line::after {
+      content: ''; position: absolute; top: 0; left: 0;
+      width: 0; height: 100%;
+      background: var(--accent-gradient);
+      transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .stepper-line.filled::after { width: 100%; }
+    .stepper-step.active .stepper-num {
+      background: var(--accent-gradient); color: white;
+    }
+    .stepper-step.active .stepper-text { color: var(--text); font-weight: 700; }
+    .stepper-step.done .stepper-num {
+      background: var(--accent-gradient); color: white;
+    }
+    .stepper-step.done .stepper-text { color: var(--text); }
+    @keyframes stepPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(14,165,233,0.3); }
+      50% { box-shadow: 0 0 0 6px rgba(14,165,233,0); }
+    }
+    .stepper-step.active .stepper-num { animation: stepPulse 2s ease-in-out infinite; }
+    [data-theme="dark"] .stepper-num { background: #374151; color: #64748b; }
+    [data-theme="dark"] .stepper-line { background: #374151; }
+    [data-theme="dark"] .stepper-step.active .stepper-text,
+    [data-theme="dark"] .stepper-step.done .stepper-text { color: var(--text); }
+
     /* ── SECTIONS ── */
     .section {
       margin-bottom: 14px;
     }
-
-    .section-label {
-      font-size: 11px; font-weight: 700; color: var(--text-muted);
-      text-transform: uppercase; letter-spacing: 0.5px;
-      margin-bottom: 8px; padding-left: 4px;
-      display: flex; align-items: center; gap: 8px;
-    }
-    .section-label .step-num {
-      width: 22px; height: 22px; border-radius: 6px;
-      background: var(--accent); color: white;
-      display: inline-flex; align-items: center; justify-content: center;
-      font-size: 11px; font-weight: 700; flex-shrink: 0;
-    }
-    [data-theme="dark"] .section-label .step-num { background: var(--accent); color: #0f1724; }
 
     /* ── CATEGORY PILLS ── */
     .cat-nav { animation: fadeInUp 0.6s ease-out 0.05s both; }
@@ -567,9 +602,31 @@
     </div>
   </div>
 
+  <!-- STEPPER -->
+  <div class="stepper" id="stepper">
+    <div class="stepper-step active" data-step="1">
+      <div class="stepper-num">1</div>
+      <span class="stepper-text">Categoria</span>
+    </div>
+    <div class="stepper-line" data-line="1"></div>
+    <div class="stepper-step" data-step="2">
+      <div class="stepper-num">2</div>
+      <span class="stepper-text">Estilo</span>
+    </div>
+    <div class="stepper-line" data-line="2"></div>
+    <div class="stepper-step" data-step="3">
+      <div class="stepper-num">3</div>
+      <span class="stepper-text">Prompt</span>
+    </div>
+    <div class="stepper-line" data-line="3"></div>
+    <div class="stepper-step" data-step="4">
+      <div class="stepper-num">4</div>
+      <span class="stepper-text">Refinar</span>
+    </div>
+  </div>
+
   <!-- PASO 1: Categoria -->
   <div class="section" style="animation: fadeInUp 0.6s ease-out 0.1s both;">
-    <div class="section-label"><span class="step-num">1</span> Tipo de imagen</div>
     <div class="cat-nav">
       <div class="cat-pills" id="cat-pills">
         <button class="cat-pill" data-cat="surgery" onclick="selectCat('surgery',this)">
@@ -590,7 +647,6 @@
 
   <!-- PASO 2: Estilo -->
   <div class="section hidden" id="sec-style">
-    <div class="section-label"><span class="step-num">2</span> Estilo de ilustracion</div>
     <div class="style-palette-header">
       <span class="style-palette-title" id="palette-cat-label">General</span>
       <span class="style-palette-line"></span>
@@ -600,7 +656,6 @@
 
   <!-- PASO 3: Resultado -->
   <div class="section hidden" id="sec-result">
-    <div class="section-label"><span class="step-num">3</span> Tu prompt listo</div>
     <div class="result-panel">
       <div class="result-header">
         <div class="result-title">
@@ -629,7 +684,6 @@
 
   <!-- PASO 4: Refinamiento -->
   <div class="section hidden" id="sec-refine">
-    <div class="section-label"><span class="step-num">4</span> Refinamiento <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--text-light);">(opcional, tras generar)</span></div>
     <div class="refine-config">
       <span><strong>Temp:</strong> 0.2</span>
       <span><strong>Top P:</strong> 0.1</span>
@@ -686,6 +740,26 @@ const REFINEMENTS=[
 
 let selCat=null, selStyle=null;
 
+// ── STEPPER ──
+function updateStepper(activeStep){
+  document.querySelectorAll('.stepper-step').forEach(function(s){
+    var n=parseInt(s.dataset.step);
+    s.classList.remove('active','done');
+    var num=s.querySelector('.stepper-num');
+    if(n<activeStep){
+      s.classList.add('done');
+      num.innerHTML='<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
+    } else {
+      num.textContent=n;
+      if(n===activeStep) s.classList.add('active');
+    }
+  });
+  document.querySelectorAll('.stepper-line').forEach(function(l){
+    var n=parseInt(l.dataset.line);
+    l.classList.toggle('filled',n<activeStep);
+  });
+}
+
 function selectCat(cat,el){
   selCat=cat; selStyle=null;
   document.querySelectorAll('.cat-pill').forEach(p=>p.classList.remove('active'));
@@ -694,6 +768,7 @@ function selectCat(cat,el){
   document.getElementById('palette-cat-label').textContent=catLabels[cat]||'General';
   renderStyles(cat);
   show('sec-style');
+  updateStepper(2);
   hide('sec-result'); hide('sec-refine'); hide('sec-tips');
 }
 
@@ -734,6 +809,7 @@ function pickStyle(style,card){
   document.getElementById('prompt-output').textContent=style.prompt;
 
   show('sec-result');show('sec-refine');show('sec-tips');
+  updateStepper(3);
 
   // slideReveal
   const el=document.getElementById('sec-result');
