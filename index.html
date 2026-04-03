@@ -51,6 +51,19 @@
 
     .app-container { max-width: 900px; margin: 0 auto; }
 
+    /* ── ACCESSIBILITY ── */
+    html { scroll-behavior: smooth; }
+    .skip-link {
+      position: absolute; top: -100px; left: 16px;
+      background: var(--text); color: var(--bg);
+      padding: 10px 20px; border-radius: 8px;
+      font-size: 14px; font-weight: 500; z-index: 1000;
+      text-decoration: none; transition: top 0.2s;
+    }
+    .skip-link:focus { top: 16px; }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    input:focus-visible, select:focus-visible, textarea:focus-visible { outline: none; }
+
     /* ── HEADER ── */
     .app-header {
       text-align: left; margin-bottom: 20px; position: relative;
@@ -468,10 +481,15 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 600px) {
-      .app-header { padding: 32px 20px 24px; border-radius: var(--radius); }
+      .app-header { padding: 24px 20px 20px; border-radius: var(--radius); }
       .hero-glow { display: none; }
       .sky-toggle { --toggle-size: 16px; top: 8px; right: 8px; }
-      .style-card { width: 135px; }
+      .header-logo { width: 36px; height: 36px; font-size: 16px; border-radius: 10px; }
+      .stepper-text { display: none; }
+      .stepper-num { width: 24px; height: 24px; font-size: 11px; }
+      .stepper-line { margin: 0 8px; }
+      .style-card { width: 140px; }
+      .style-card-thumb { height: 75px; }
       .refine-grid { grid-template-columns: 1fr; }
       .config-strip { flex-wrap: wrap; }
       .config-item { min-width: 25%; }
@@ -486,7 +504,8 @@
   </style>
 </head>
 <body>
-<div class="app-container">
+<a href="#main" class="skip-link">Saltar al contenido</a>
+<div class="app-container" id="main">
 
   <!-- HEADER -->
   <div class="app-header">
