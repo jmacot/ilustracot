@@ -1,75 +1,74 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Este archivo orienta a Claude Code (claude.ai/code) para trabajar con este repositorio.
 
-## Project Overview
+## Proyecto
 
-IlustraCOT is a prompt generator for medical illustrations in Orthopedic Surgery (COT). It creates optimized prompts for AI image generators (Gemini, DALL-E, Midjourney) with professional visual styles. Live at: https://jmacot.github.io/ilustracot/
+IlustraCOT es un generador de prompts para ilustraciones médicas en COT. Crea prompts optimizados para generadores de imágenes IA (Gemini, DALL-E, Midjourney) con estilos visuales profesionales.
 
-## Architecture
+## Arquitectura
 
-**Single-file HTML app** (~870 lines) — all CSS in `<style>`, all JS in `<script>`, no build tools, no frameworks. Vanilla JS only. This follows the parent project convention (see `../CLAUDE.md`).
+**App single-file HTML** (~870 líneas) — todo el CSS en `<style>`, todo el JS en `<script>`, sin build tools ni frameworks. Solo vanilla JS. Sigue la convención del proyecto padre (ver `../CLAUDE.md`).
 
-### Custom Design System (neither A nor B)
+### Sistema de diseño propio (ni A ni B)
 
-This app uses its **own "Studio Creativo" palette**, distinct from the parent project's System A/B:
-- Fonts: Inter + Lora (via Google Fonts CDN)
+Usa su propia paleta **"Studio Creativo"**, distinta de los Sistemas A/B:
+- Fuentes: Inter + Lora (Google Fonts CDN)
 - Light: cream `#f8f6f3`, dark: `#111827`
-- Accent: sky blue `#0ea5e9` / indigo gradient
-- Header: solid dark blue gradient `#0f2240 → #1a3a5c → #234e77` with dot grid + glows
-- Dark mode: `[data-theme="dark"]` with CSS-only sky toggle (checkbox-based, not JS button)
+- Acento: sky blue `#0ea5e9` / gradiente índigo
+- Header: gradiente azul oscuro sólido `#0f2240 → #1a3a5c → #234e77` con dot grid + glows
+- Dark mode: `[data-theme="dark"]` con sky toggle CSS puro (basado en checkbox, no botón JS)
 
-### App Flow (4-step stepper)
+### Flujo de la app (stepper de 4 pasos)
 
-1. **Categoria** — category pills (surgery, endo, radio) trigger `selectCat()`
-2. **Estilo** — horizontal carousel rendered by `renderStyles()`, cards built dynamically
-3. **Prompt** — result panel with config strip + prompt textarea, copy button via `copyMain()`
-4. **Refinar** — refinement chips grid rendered by `renderRefine()`
+1. **Categoría** — pills de categoría (cirugía, endo, radio) disparan `selectCat()`
+2. **Estilo** — carrusel horizontal renderizado por `renderStyles()`, cards dinámicas
+3. **Prompt** — panel de resultado con config strip + textarea de prompt, botón copiar vía `copyMain()`
+4. **Refinar** — grid de chips de refinamiento renderizado por `renderRefine()`
 
-### Key JS Functions
+### Funciones JS clave
 
-- `selectCat(cat, el)` — selects category, renders styles, advances stepper
-- `renderStyles(cat)` — builds style cards in carousel from `STYLES` data object
-- `selectStyle(key, el)` — selects style, shows result panel with generated prompt
-- `renderRefine(cat, style)` — builds refinement suggestion chips
-- `copyMain()` / `copyRefine(text, el)` — clipboard copy with toast feedback
-- `advanceStepper(step)` — updates stepper UI to given step number
-- `applyTheme(dark)` — toggles dark/light mode, updates CSS vars and meta theme-color
+- `selectCat(cat, el)` — selecciona categoría, renderiza estilos, avanza stepper
+- `renderStyles(cat)` — construye cards de estilo en carrusel desde el objeto `STYLES`
+- `selectStyle(key, el)` — selecciona estilo, muestra panel con prompt generado
+- `renderRefine(cat, style)` — construye chips de sugerencias de refinamiento
+- `copyMain()` / `copyRefine(text, el)` — copiar al portapapeles con toast de feedback
+- `advanceStepper(step)` — actualiza UI del stepper al paso dado
+- `applyTheme(dark)` — alterna dark/light mode, actualiza CSS vars y meta theme-color
 
-### Data Structure
+### Estructura de datos
 
-The `STYLES` object is the core data — keyed by style ID, each entry contains:
-- `name`, `cat` (category), `thumb` (gradient CSS for card), `icon` (SVG path)
-- `prompt` (the full AI prompt text)
-- `config` (model settings: model name, temperature, topP, topK)
+El objeto `STYLES` es el dato central — indexado por ID de estilo, cada entrada contiene:
+- `name`, `cat` (categoría), `thumb` (CSS gradiente para card), `icon` (SVG path)
+- `prompt` (texto completo del prompt IA)
+- `config` (configuración del modelo: nombre, temperature, topP, topK)
 
-## Development
+## Desarrollo
 
-No build step. Open `index.html` in a browser or serve locally:
+Sin build step. Abrir `index.html` en navegador o servir localmente:
 ```bash
-python3 -m http.server 8000
-# then open http://localhost:8000
+npx serve -l 8089
 ```
 
-## Deployment
+## Deploy
 
-GitHub Pages from `main` branch, root `/`. Push to `main` = deploy.
+GitHub Pages desde rama `main`, raíz `/`. Push a `main` = deploy.
 
-## Conventions
+## Convenciones
 
-- Language: `lang="es"` always, all UI text in Spanish
-- Dark mode via `[data-theme="dark"]` CSS custom properties — never inline color overrides
-- Accessibility: skip link, `focus-visible`, ARIA roles on interactive elements, `prefers-reduced-motion`
-- Responsive: mobile-first breakpoint at 600px, hero glows hidden on mobile
-- Toast notifications for copy feedback (purple `#7c3aed`)
-- Theme persists in `localStorage` with daily expiry (resets to auto-detect each day)
+- Idioma: `lang="es"` siempre, todo el texto UI en español
+- Dark mode vía custom properties CSS `[data-theme="dark"]` — nunca overrides de color inline
+- Accesibilidad: skip link, `focus-visible`, roles ARIA en elementos interactivos, `prefers-reduced-motion`
+- Responsive: mobile-first breakpoint a 600px, hero glows ocultos en móvil
+- Notificaciones toast para feedback de copia (purple `#7c3aed`)
+- Tema persiste en `localStorage` con expiración diaria (resetea a auto-detect cada día)
 
-## File Structure
+## Estructura de archivos
 
 ```
-index.html          ← entire app (CSS + HTML + JS)
-assets/             ← style thumbnail images
-  cirugia-abierta/  ← surgery style samples (4 PNGs)
-  radiologia/       ← radiology style samples (1 PNG)
-docs/               ← analysis docs and design specs
+index.html          ← app completa (CSS + HTML + JS)
+assets/             ← imágenes de muestra de estilos
+  cirugia-abierta/  ← muestras estilo cirugía (4 PNGs)
+  radiologia/       ← muestras estilo radiología (1 PNG)
+docs/               ← docs de análisis y specs de diseño
 ```
