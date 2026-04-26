@@ -22,9 +22,12 @@ Generador de prompts para ilustraciones medicas de Cirugia Ortopedica y Traumato
 - **Generador de prompts** optimizados para ilustraciones medicas con IA
 - **3 categorias**: cirugia abierta, endoscopia y radiologia
 - **12 estilos visuales**: fotorrealista, digital, textbook, esquematico (x3 categorias) + angiografia y screenshot fixer
+- **Stepper visual** con indicador de progreso, lineas conectoras y animacion pulse en el paso activo
+- **Carrusel horizontal de estilos** con miniaturas para preview rapido
 - **Prompts completos** listos para copiar y usar en Gemini, DALL-E o Midjourney
 - **Refinamiento** con sugerencias contextuales por estilo
-- **Modo oscuro** con deteccion automatica
+- **Modo oscuro** con sky toggle CSS puro y deteccion automatica
+- **Accesibilidad**: skip link, focus-visible, ARIA roles en el carrusel
 - **Responsive** para uso en escritorio y movil
 
 ---
@@ -60,8 +63,8 @@ Ilustracot/
 
 ## Tecnologia
 
-- **HTML5 + CSS3 + JavaScript vanilla**
-- Tipografias: [Inter](https://fonts.google.com/specimen/Inter) y [Lora](https://fonts.google.com/specimen/Lora) (Google Fonts)
+- **HTML5 + CSS3 + JavaScript vanilla** (sistema de diseño propio "Studio Creativo")
+- Header con logo, dot grid, glows decorativos y mesh gradient animado de fondo
 - Sin frameworks, sin build tools, sin backend
 
 ---
